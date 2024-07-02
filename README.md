@@ -47,10 +47,10 @@ pip install -r requirements.txt
 
 **For Any Comments, Contact Us On LinkedIN**
 
-- **Team Leader**: [LinkedIn Profile](https://www.linkedin.com/in/mohamed-elsayed-7aaa81223/)
-  
 - **Our Supervisor**: [LinkedIn Profile](https://www.linkedin.com/in/samar-elbedwehy-6a8299128/)
-  
+
+- **Team Leader**: [LinkedIn Profile](https://www.linkedin.com/in/mohamed-elsayed-7aaa81223/)
+    
 - **Co-Author Name**: [LinkedIn Profile](https://www.linkedin.com/in/youssef-khalf-784a4621b/)
 
 - **Co-Author Name**: [LinkedIn Profile](https://www.linkedin.com/in/randa-hamada-201811222/)
