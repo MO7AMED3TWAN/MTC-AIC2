@@ -1,5 +1,5 @@
-from resemblyzer.hparams import *
-from resemblyzer import audio
+from Dirization.hparams import *
+from Dirization.audio import *
 from pathlib import Path
 from typing import Union, List
 from torch import nn
@@ -149,7 +149,7 @@ class VoiceEncoder(nn.Module):
             wav = np.pad(wav, (0, max_wave_length - len(wav)), "constant")
 
         # Split the utterance into partials and forward them through the model
-        mel = audio.wav_to_mel_spectrogram(wav)
+        mel = wav_to_mel_spectrogram(wav)
         mels = np.array([mel[s] for s in mel_slices])
         with torch.no_grad():
             mels = torch.from_numpy(mels).to(self.device)
