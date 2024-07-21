@@ -1,3 +1,11 @@
 numpy
 pandas
 tensorflow
+scipy
+pathlib
+typing
+webrtcvad
+librosa
+struct
+torch 
+time

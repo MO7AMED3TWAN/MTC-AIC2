@@ -173,5 +173,5 @@ class VoiceEncoder(nn.Module):
         :return: the embedding as a numpy array of float32 of shape (model_embedding_size,).
         """
         raw_embed = np.mean([self.embed_utterance(wav, return_partials=False, **kwargs) \
-                             for wav in wavs], axis=0)
+                            for wav in wavs], axis=0)
         return raw_embed / np.linalg.norm(raw_embed, 2)

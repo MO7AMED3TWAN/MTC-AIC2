@@ -1,0 +1,158 @@
+    min_clusters: Minimum number of clusters.
+        Starting Point: 2
+        Considerations: Set this based on the smallest number of meaningful groups you expect in your data.
+
+    max_clusters: Maximum number of clusters.
+        Starting Point: 3
+        Considerations: Set this based on the largest number of groups you expect. You can experiment with higher values if you expect more clusters.
+
+    stop_eigenvalue: Threshold for considering significant eigenvalues.
+        Starting Point: 1×10−21×10−2
+        Considerations: This controls the precision of eigenvalue computation. A lower value might be needed for more precise clustering but could increase computation time.
+
+    row_wise_renorm: Whether to perform row-wise normalization on spectral embeddings.
+        Starting Point: True
+        Considerations: Normalization can help in some cases, especially when the data has varying scales.
+
+    custom_dist: Distance metric for clustering.
+        Starting Point: "cosine"
+        Considerations: Cosine distance is suitable for high-dimensional data like embeddings. Other options include "euclidean" or custom distance functions.
+
+    max_iter: Maximum iterations for clustering (e.g., k-means).
+        Starting Point: 300
+        Considerations: This is a standard setting, but you can increase it if the clustering algorithm does not converge.
+
+    eigengap_type: Method for computing the eigen gap.
+        Starting Point: EigenGapType.Ratio
+        Considerations: The ratio method is commonly used, but other methods may be suitable depending on your data.
+
+Best Practices
+
+    Data Preprocessing: Ensure your data is preprocessed appropriately (e.g., normalization, noise reduction).
+    Experimentation: Experiment with different values for min_clusters and max_clusters to see how they affect your results.
+    Validation: Use methods like silhouette scores, Davies-Bouldin index, or domain-specific metrics to validate your clusters.
+    Parameter Tuning: Use techniques like grid search or random search to find the best hyperparameters.
+    Visual Inspection: Visualize clusters when possible to inspect the quality of clustering.
+
+
+
+clusterer = SpectralClusterer(
+    min_clusters=None,  # Default
+    max_clusters=None,  # Default
+    refinement_options=None,  # Default
+    autotune=None,  # Default
+    fallback_options=None,  # Default
+    laplacian_type=None,  # Default
+    stop_eigenvalue=1e-2,  # Default
+    row_wise_renorm=False,  # Default
+    custom_dist="cosine",  # Default
+    max_iter=300,  # Default
+    constraint_options=None,  # Default
+    eigengap_type=EigenGapType.Ratio,  # Default
+    max_spectral_size=None,  # Default
+    affinity_function=utils.compute_affinity_matrix,  # Default
+    post_eigen_cluster_function=custom_distance_kmeans.run_kmeans  # Default
+)
+
+labels = clusterer.predict(cont_embeds)
+
+
+
+
+
+min_clusters:
+
+    Type: Optional[int]
+    Default: None
+    Description: Minimum number of clusters allowed.
+
+max_clusters:
+
+    Type: Optional[int]
+    Default: None
+    Description: Maximum number of clusters allowed.
+
+refinement_options:
+
+    Type: Optional[RefinementOptions]
+    Default: None
+    Description: Contains refinement arguments for the affinity matrix.
+    Options: RefinementOptions object.
+
+autotune:
+
+    Type: Optional[AutoTune]
+    Default: None
+    Description: An AutoTune object to automatically search for p_percentile.
+    Options: AutoTune object.
+
+fallback_options:
+
+    Type: Optional[FallbackOptions]
+    Default: None
+    Description: Indicates when to run fallback clusterer instead of spectral clusterer.
+    Options: FallbackOptions object.
+
+laplacian_type:
+
+    Type: Optional[LaplacianType]
+    Default: None
+    Description: Type of the Laplacian matrix to use.
+    Options: Values from the LaplacianType enum (e.g., LaplacianType.Affinity, LaplacianType.GraphCut).
+
+stop_eigenvalue:
+
+    Type: float
+    Default: 1e-2
+    Description: When computing the number of clusters using the EigenGap principle, eigenvalues smaller than this value are not considered.
+
+row_wise_renorm:
+
+    Type: bool
+    Default: False
+    Description: If True, perform row-wise re-normalization on the spectral embeddings.
+
+custom_dist:
+
+    Type: Union[str, Callable]
+    Default: "cosine"
+    Description: Custom distance measure for k-means.
+    Options: "cosine", "euclidean", "mahalanobis", or any other distance functions defined in scipy.spatial.distance.
+
+max_iter:
+
+    Type: int
+    Default: 300
+    Description: Maximum number of iterations for the custom k-means.
+
+constraint_options:
+
+    Type: Optional[ConstraintOptions]
+    Default: None
+    Description: Contains constraint arguments.
+    Options: ConstraintOptions object.
+
+eigengap_type:
+
+    Type: EigenGapType
+    Default: EigenGapType.Ratio
+    Description: The type of the eigengap computation.
+    Options: Values from the EigenGapType enum (e.g., EigenGapType.Ratio, EigenGapType.NormalizedGap).
+
+max_spectral_size:
+
+    Type: Optional[int]
+    Default: None
+    Description: Maximum size of input to the spectral clustering algorithm.
+
+affinity_function:
+
+    Type: Callable
+    Default: utils.compute_affinity_matrix
+    Description: Function to compute the affinity matrix from the embeddings.
+
+post_eigen_cluster_function:
+
+    Type: Callable
+    Default: custom_distance_kmeans.run_kmeans
+    Description: Function to cluster the spectral embeddings after the eigenvalue computations.
