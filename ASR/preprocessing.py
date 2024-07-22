@@ -9,7 +9,7 @@ from ASR.hparams import *
 char_to_num = keras.layers.StringLookup(vocabulary=list(characters), oov_token="")
 num_to_char = keras.layers.StringLookup(vocabulary=char_to_num.get_vocabulary(), oov_token="", invert=True)
 
-def preprocess_audio(wav_file):
+def Fpreprocess_audio(wav_file):
     """
     Preprocesses a single audio file for ASR.
     
@@ -23,6 +23,35 @@ def preprocess_audio(wav_file):
     audio, _ = tf.audio.decode_wav(file)
     audio = tf.squeeze(audio, axis=-1)
     audio = tf.cast(audio, tf.float32)
+    
+    if tf.shape(audio)[0] < fft_length:
+        pad_amount = fft_length - tf.shape(audio)[0]
+        audio = tf.pad(audio, paddings=[[0, pad_amount]])
+    
+    spectrogram = tf.signal.stft(
+        audio, frame_length=frame_length, frame_step=frame_step, fft_length=fft_length
+    )
+    spectrogram = tf.abs(spectrogram)
+    spectrogram = tf.math.pow(spectrogram, 0.5)
+    
+    means = tf.math.reduce_mean(spectrogram, 1, keepdims=True)
+    stddevs = tf.math.reduce_std(spectrogram, 1, keepdims=True)
+    spectrogram = (spectrogram - means) / (stddevs + 1e-10)
+    
+    return spectrogram
+
+def Apreprocess_audio(audio_array):
+    """
+    Preprocesses a NumPy array of audio samples for ASR.
+    
+    Parameters:
+    - audio_array (np.ndarray): Array of audio samples.
+    
+    Returns:
+    - spectrogram (Tensor): Preprocessed spectrogram.
+    """
+    # Convert the NumPy array to a TensorFlow tensor
+    audio = tf.convert_to_tensor(audio_array, dtype=tf.float32)
     
     if tf.shape(audio)[0] < fft_length:
         pad_amount = fft_length - tf.shape(audio)[0]
