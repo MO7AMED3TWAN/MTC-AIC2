@@ -3,10 +3,6 @@ numpy
 pandas
 scipy
 librosa
-struct
-pathlib
-typing
-time
 
 # TensorFlow and Keras
 tensorflow
@@ -23,6 +19,3 @@ tqdm
 
 # Spectral Clustering
 spectralcluster
-
-# Additional Dependencies
-scipy
