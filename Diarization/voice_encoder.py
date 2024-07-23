@@ -1,5 +1,5 @@
-from Dirization.hparams import *
-from Dirization.audio import *
+from Diarization.hparams import *
+from Diarization.audio import *
 from pathlib import Path
 from typing import Union, List
 from torch import nn
