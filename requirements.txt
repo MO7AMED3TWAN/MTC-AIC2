@@ -1,11 +1,28 @@
+# Core Libraries
 numpy
 pandas
-tensorflow
 scipy
-pathlib
-typing
-webrtcvad
 librosa
 struct
-torch 
+pathlib
+typing
 time
+
+# TensorFlow and Keras
+tensorflow
+keras
+
+# PyTorch
+torch
+
+# WebRTC Voice Activity Detection
+webrtcvad
+
+# Progress Bar
+tqdm
+
+# Spectral Clustering
+spectralcluster
+
+# Additional Dependencies
+scipy

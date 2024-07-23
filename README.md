@@ -2,18 +2,28 @@
 
 This repository contains The code Of using the Automatic Speech Recognition (ASR) system that we built to predict text for Arabic audio in the Egyptian dialect.
 
+And Now It's Updated To Include The Diarization Speaker In It 
+
+We Follow THe Paper Of Google Labs In THe Topic Of Diarization 
+[PAPER OF GOOGLE](https://arxiv.org/pdf/1710.10468v7)
+
 It is provided to senior management of the MTC-AIC 2 competition
 
 ## Overview
 
 This Notebook demonstrates how to Load audio data, load a pre-trained ASR model, predict transcripts from audio files, and save results to a CSV file.
 
-### Requirements
+In Addition To SPEAKER DIARIZATION Done By Diarization&ASR.ipynb  Notebook
+
+### Base Requirements
 
 - Python 3.x
 - TensorFlow
 - Keras
 - pandas
+- scipy
+- torch
+- spectralcluster
 
 ### Installation
 
@@ -31,15 +41,15 @@ pip install -r requirements.txt
 
 #### Project Structure
 
-- **Data/**: Put your Test Audios There.
-- **Models/**: There You Will find The Model And Configuration Of It.
-- **Output/**: There You Will Get Your Predictable Transcript For Your Audios Files.
+- **Data/DataForDiarization**: Put your Test Audios There.
+- **Models/**: There You Will find The Models And Configurations Of ALL.
+- **Output/DiarizationResults**: There You Will Get Your Predictable JSON Files For Your Audios Files.
 
 #### Project Workflow
 
-1. Place your test audio files (in WAV format) in the `Data` directory.
-2. Run the notebook or script `PredictText.ipynb` to generate transcripts.
-3. Predictions will be saved to `./Output/predictions.csv`.
+1. Place your test audio files (in WAV format) in the `Data/DataForDiarization` directory.
+2. Run the notebook or script `Diarization&ASR.ipynb` to generate transcripts.
+3. Predictions will be saved to `Output/DiarizationResults`.
 
 ## LinkedIn Profiles
 
